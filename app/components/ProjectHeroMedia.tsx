@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { Project } from "@/app/lib/projects";
+import { asset } from "@/app/lib/asset";
 import PhotoGallery from "./PhotoGallery";
 
 export default function ProjectHeroMedia({
@@ -24,8 +25,8 @@ export default function ProjectHeroMedia({
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        src={hero.src}
-        poster={hero.poster}
+        src={asset(hero.src)}
+        poster={hero.poster ? asset(hero.poster) : undefined}
         autoPlay
         muted
         loop
@@ -40,14 +41,14 @@ export default function ProjectHeroMedia({
       <div className="absolute inset-0 bg-black">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={hero.src}
+          src={asset(hero.src)}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl opacity-60"
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={hero.src}
+          src={asset(hero.src)}
           alt=""
           className="absolute inset-0 w-full h-full object-contain object-center drop-shadow-[0_25px_60px_rgba(0,0,0,0.75)]"
         />

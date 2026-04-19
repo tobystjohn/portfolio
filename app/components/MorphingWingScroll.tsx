@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
+import { asset } from "@/app/lib/asset";
 
 function ScrubVideo({
   src,
@@ -94,13 +95,13 @@ export default function MorphingWingScroll() {
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.div style={{ opacity: flapVisible }} className="absolute inset-0">
-          <ScrubVideo src="/morphing-wing/flap.mov" progress={flapProgress} loop={isMobile} />
+          <ScrubVideo src={asset("/morphing-wing/flap.mov")} progress={flapProgress} loop={isMobile} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40 pointer-events-none" />
         </motion.div>
 
         <motion.div style={{ opacity: thicknessVisible }} className="absolute inset-0">
           <ScrubVideo
-            src="/morphing-wing/change_in_thickness.mov"
+            src={asset("/morphing-wing/change_in_thickness.mov")}
             progress={thicknessProgress}
             loop={isMobile}
           />

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { projects, getProject } from "@/app/lib/projects";
+import { asset } from "@/app/lib/asset";
 import Nav from "@/app/components/Nav";
 import ProjectHeroMedia from "@/app/components/ProjectHeroMedia";
 import ScrollVideoHero from "@/app/components/ScrollVideoHero";
@@ -134,7 +135,7 @@ export default async function ProjectPage({
                 <figure className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/40">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={s.image}
+                    src={asset(s.image)}
                     alt={s.imageCaption ?? s.heading}
                     className="w-full h-auto"
                   />

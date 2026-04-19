@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
+import { asset } from "@/app/lib/asset";
 
 export default function LaunchHero() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -73,7 +74,7 @@ export default function LaunchHero() {
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover object-center"
-          src="/openingvideo.mp4"
+          src={asset("/openingvideo.mp4")}
           muted
           playsInline
           preload="auto"

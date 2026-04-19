@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Project } from "@/app/lib/projects";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
+import { asset } from "@/app/lib/asset";
 
 export default function ScrollVideoHero({ project }: { project: Project }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -53,8 +54,8 @@ export default function ScrollVideoHero({ project }: { project: Project }) {
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
-          src={project.hero.src}
-          poster={project.hero.poster}
+          src={project.hero.src ? asset(project.hero.src) : undefined}
+          poster={project.hero.poster ? asset(project.hero.poster) : undefined}
           muted
           playsInline
           preload="auto"

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { asset } from "@/app/lib/asset";
 
 type GalleryItem = {
   src: string;
@@ -87,7 +88,7 @@ export default function PhotoGallery({
                 ...(captionMap[src] ?? {}),
               });
             img.onerror = () => resolve(null);
-            img.src = src;
+            img.src = asset(src);
           })
       )
     ).then((results) => {
@@ -140,7 +141,7 @@ export default function PhotoGallery({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={current.src}
+              src={asset(current.src)}
               alt={current.label ?? ""}
               className="w-full h-full object-cover"
             />
