@@ -95,13 +95,13 @@ export default function MorphingWingScroll() {
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.div style={{ opacity: flapVisible }} className="absolute inset-0">
-          <ScrubVideo src={asset("/morphing-wing/flap.mov")} progress={flapProgress} loop={isMobile} />
+          <ScrubVideo src={asset("/morphing-wing/flap.mp4")} progress={flapProgress} loop={isMobile} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40 pointer-events-none" />
         </motion.div>
 
         <motion.div style={{ opacity: thicknessVisible }} className="absolute inset-0">
           <ScrubVideo
-            src={asset("/morphing-wing/change_in_thickness.mov")}
+            src={asset("/morphing-wing/change_in_thickness.mp4")}
             progress={thicknessProgress}
             loop={isMobile}
           />
