@@ -4,14 +4,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Project } from "@/app/lib/projects";
-import { useIsMobile } from "@/app/hooks/useIsMobile";
 import { asset } from "@/app/lib/asset";
 
 export default function ScrollVideoHero({ project }: { project: Project }) {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [duration, setDuration] = useState(0);
-  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -29,21 +27,16 @@ export default function ScrollVideoHero({ project }: { project: Project }) {
 
   useEffect(() => {
     const v = videoRef.current;
-    if (!v) return;
-    if (isMobile) {
-      v.pause();
-      try {
-        v.currentTime = 0;
-      } catch {}
-      return;
-    }
-    if (!duration) return;
+    if (!v || !duration) return;
+    v.play()
+      .then(() => v.pause())
+      .catch(() => {});
     const unsub = scrollYProgress.on("change", (p) => {
       const t = Math.max(0, Math.min(duration - 0.01, p * duration));
       if (Math.abs(v.currentTime - t) > 0.03) v.currentTime = t;
     });
     return () => unsub();
-  }, [duration, scrollYProgress, isMobile]);
+  }, [duration, scrollYProgress]);
 
   const introOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   const introY = useTransform(scrollYProgress, [0, 0.3], [0, -60]);

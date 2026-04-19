@@ -4,14 +4,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import { useIsMobile } from "@/app/hooks/useIsMobile";
 import { asset } from "@/app/lib/asset";
 
 export default function LaunchHero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [duration, setDuration] = useState(0);
-  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -29,15 +27,14 @@ export default function LaunchHero() {
 
   useEffect(() => {
     const v = videoRef.current;
-    if (!v) return;
-    if (isMobile) {
-      v.pause();
-      try {
-        v.currentTime = 0;
-      } catch {}
-      return;
-    }
-    if (!duration) return;
+    if (!v || !duration) return;
+    // iOS Safari needs a play/pause kick before currentTime can be set reliably.
+    const unlock = () => {
+      v.play()
+        .then(() => v.pause())
+        .catch(() => {});
+    };
+    unlock();
     let raf = 0;
     let target = 0;
     const tick = () => {
@@ -57,7 +54,7 @@ export default function LaunchHero() {
       unsub();
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [duration, scrollYProgress, isMobile]);
+  }, [duration, scrollYProgress]);
 
   const ignitionOpacity = useTransform(scrollYProgress, [0, 0.08, 0.22, 0.3], [1, 1, 1, 0]);
   const liftoffOpacity = useTransform(scrollYProgress, [0.3, 0.4, 0.55, 0.65], [0, 1, 1, 0]);

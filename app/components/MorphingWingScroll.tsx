@@ -2,17 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import { useIsMobile } from "@/app/hooks/useIsMobile";
 import { asset } from "@/app/lib/asset";
 
 function ScrubVideo({
   src,
   progress,
-  loop,
 }: {
   src: string;
   progress: MotionValue<number>;
-  loop: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [duration, setDuration] = useState(0);
@@ -28,22 +25,17 @@ function ScrubVideo({
 
   useEffect(() => {
     const v = videoRef.current;
-    if (!v) return;
-    if (loop) {
-      v.pause();
-      try {
-        v.currentTime = 0;
-      } catch {}
-      return;
-    }
-    if (!duration) return;
+    if (!v || !duration) return;
+    v.play()
+      .then(() => v.pause())
+      .catch(() => {});
     const unsub = progress.on("change", (p) => {
       const clamped = Math.max(0, Math.min(1, p));
       const t = Math.max(0, Math.min(duration - 0.01, clamped * duration));
       if (Math.abs(v.currentTime - t) > 0.03) v.currentTime = t;
     });
     return () => unsub();
-  }, [duration, progress, loop]);
+  }, [duration, progress]);
 
   return (
     <video
@@ -61,7 +53,6 @@ function ScrubVideo({
 
 export default function MorphingWingScroll() {
   const ref = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -98,7 +89,7 @@ export default function MorphingWingScroll() {
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.div style={{ opacity: flapVisible }} className="absolute inset-0">
-          <ScrubVideo src={asset("/morphing-wing/flap.mp4")} progress={flapProgress} loop={isMobile} />
+          <ScrubVideo src={asset("/morphing-wing/flap.mp4")} progress={flapProgress} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40 pointer-events-none" />
         </motion.div>
 
@@ -106,7 +97,6 @@ export default function MorphingWingScroll() {
           <ScrubVideo
             src={asset("/morphing-wing/change_in_thickness.mp4")}
             progress={thicknessProgress}
-            loop={isMobile}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40 pointer-events-none" />
         </motion.div>
