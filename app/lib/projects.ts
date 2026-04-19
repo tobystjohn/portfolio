@@ -46,7 +46,6 @@ export const projects: Project[] = [
     hero: {
       type: "scroll-video",
       src: "/drone.mp4",
-      poster: "/Stallion_VTOL_drone_202604181717.jpeg",
     },
     meta: [
       { label: "Platform", value: "Flightory Stallion" },

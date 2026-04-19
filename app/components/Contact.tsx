@@ -16,9 +16,24 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 const links = [
-  { icon: Mail, label: "Email", href: "mailto:hello@example.com", handle: "hello@example.com" },
-  { icon: GithubIcon, label: "GitHub", href: "https://github.com/", handle: "@yourhandle" },
-  { icon: LinkedinIcon, label: "LinkedIn", href: "https://linkedin.com/in/", handle: "/in/yourname" },
+  {
+    icon: Mail,
+    label: "Email",
+    href: "mailto:tstjohn2@icloud.com",
+    handle: "tstjohn2@icloud.com",
+  },
+  {
+    icon: LinkedinIcon,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/toby-st-john-034270274/",
+    handle: "/in/toby-st-john",
+  },
+  {
+    icon: GithubIcon,
+    label: "GitHub",
+    href: "https://github.com/tobystjohn",
+    handle: "@tobystjohn",
+  },
 ];
 
 export default function Contact() {

@@ -155,7 +155,7 @@ export default function PhotoGallery({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="absolute bottom-24 left-6 md:left-16 right-6 md:right-auto max-w-xl z-10 pointer-events-none"
+          className="absolute top-28 md:top-32 right-6 md:right-16 left-6 md:left-auto max-w-sm z-10 pointer-events-none text-left md:text-right"
         >
           {current.label && (
             <p className="font-mono text-xs uppercase tracking-widest text-emerald-400 mb-2 drop-shadow-lg">
