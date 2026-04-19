@@ -30,7 +30,10 @@ function ScrubVideo({
     const v = videoRef.current;
     if (!v) return;
     if (loop) {
-      v.play().catch(() => {});
+      v.pause();
+      try {
+        v.currentTime = 0;
+      } catch {}
       return;
     }
     if (!duration) return;
@@ -50,8 +53,8 @@ function ScrubVideo({
       muted
       playsInline
       preload="auto"
-      autoPlay={loop}
-      loop={loop}
+      autoPlay={false}
+      loop={false}
     />
   );
 }

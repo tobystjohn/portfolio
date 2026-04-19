@@ -31,7 +31,10 @@ export default function ScrollVideoHero({ project }: { project: Project }) {
     const v = videoRef.current;
     if (!v) return;
     if (isMobile) {
-      v.play().catch(() => {});
+      v.pause();
+      try {
+        v.currentTime = 0;
+      } catch {}
       return;
     }
     if (!duration) return;
@@ -59,8 +62,8 @@ export default function ScrollVideoHero({ project }: { project: Project }) {
           muted
           playsInline
           preload="auto"
-          autoPlay={isMobile}
-          loop={isMobile}
+          autoPlay={false}
+          loop={false}
         />
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/70 pointer-events-none" />

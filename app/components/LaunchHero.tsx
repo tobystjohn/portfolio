@@ -31,7 +31,10 @@ export default function LaunchHero() {
     const v = videoRef.current;
     if (!v) return;
     if (isMobile) {
-      v.play().catch(() => {});
+      v.pause();
+      try {
+        v.currentTime = 0;
+      } catch {}
       return;
     }
     if (!duration) return;
@@ -79,8 +82,8 @@ export default function LaunchHero() {
           playsInline
           preload="auto"
           disablePictureInPicture
-          autoPlay={isMobile}
-          loop={isMobile}
+          autoPlay={false}
+          loop={false}
         />
 
         <motion.div
