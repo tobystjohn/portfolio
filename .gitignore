@@ -43,3 +43,10 @@ next-env.d.ts
 # reference material, not deployed
 /untitled folder/
 /portfolio/
+
+# raw camera footage — keep originals local, only commit the converted .mp4
+public/*.MOV
+public/*.mov
+
+# local Claude Code dev-server config
+/.claude/

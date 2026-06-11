@@ -59,15 +59,15 @@ export default function LaunchHero() {
   const ignitionOpacity = useTransform(scrollYProgress, [0, 0.08, 0.22, 0.3], [1, 1, 1, 0]);
   const liftoffOpacity = useTransform(scrollYProgress, [0.3, 0.4, 0.55, 0.65], [0, 1, 1, 0]);
   const ascentOpacity = useTransform(scrollYProgress, [0.4, 0.48, 0.55, 0.62], [0, 1, 1, 0]);
-  const nameOpacity = useTransform(scrollYProgress, [0.58, 0.68], [0, 1]);
-  const nameY = useTransform(scrollYProgress, [0.58, 0.68], [30, 0]);
-  const cueOpacity = useTransform(scrollYProgress, [0, 0.1, 0.62, 0.75], [1, 0.6, 0, 0]);
+  const nameOpacity = useTransform(scrollYProgress, [0.32, 0.45], [0, 1]);
+  const nameY = useTransform(scrollYProgress, [0.32, 0.45], [30, 0]);
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.05, 0.3, 0.42], [1, 1, 1, 0]);
   const vignetteOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.4, 0.3, 0.3, 0.7]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-[400vh] bg-black"
+      className="relative h-[140vh] bg-black"
       aria-label="Opening sequence"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
@@ -119,25 +119,27 @@ export default function LaunchHero() {
           <p className="mt-4 text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-2xl leading-[0.95]">
             Aerospace.
             <br />
-            Builder.
-            <br />
             Engineer.
           </p>
         </motion.div>
 
         <motion.div
           style={{ opacity: cueOpacity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 pointer-events-none"
         >
-          <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/60">
-            Scroll
-          </span>
           <motion.span
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity }}
-            className="text-white/60"
+            animate={{ opacity: [0.75, 1, 0.75] }}
+            transition={{ duration: 1.8, repeat: Infinity }}
+            className="font-mono text-base md:text-2xl font-bold uppercase tracking-[0.4em] text-emerald-400 drop-shadow-[0_0_20px_rgba(16,185,129,0.6)]"
           >
-            <ArrowDown size={14} />
+            Scroll to launch
+          </motion.span>
+          <motion.span
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity }}
+            className="text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.6)]"
+          >
+            <ArrowDown size={32} strokeWidth={2.5} />
           </motion.span>
         </motion.div>
 

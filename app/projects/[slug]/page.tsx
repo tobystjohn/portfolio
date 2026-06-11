@@ -146,6 +146,22 @@ export default async function ProjectPage({
                   )}
                 </figure>
               )}
+              {s.video && (
+                <figure className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/40 max-w-sm mx-auto">
+                  <video
+                    src={asset(s.video)}
+                    className="w-full h-auto block"
+                    controls
+                    playsInline
+                    preload="metadata"
+                  />
+                  {s.videoCaption && (
+                    <figcaption className="px-4 py-3 text-sm text-white/60 border-t border-white/5 font-mono">
+                      {s.videoCaption}
+                    </figcaption>
+                  )}
+                </figure>
+              )}
             </RevealSection>
           ))}
         </div>

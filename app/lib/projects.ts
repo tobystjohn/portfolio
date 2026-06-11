@@ -5,6 +5,8 @@ export type ProjectSection = {
   table?: { label: string; value: string }[];
   image?: string;
   imageCaption?: string;
+  video?: string;
+  videoCaption?: string;
 };
 
 export type SidebarCard = {
@@ -48,24 +50,32 @@ export const projects: Project[] = [
       src: "/drone.mp4",
     },
     meta: [
-      { label: "Platform", value: "Flightory Stallion" },
       { label: "Flight Stack", value: "ArduPilot" },
       { label: "Target Endurance", value: "4+ Hours" },
       { label: "AUW (target)", value: "< 3 kg" },
+      { label: "Airframe", value: "PA6-CF (custom print)" },
     ],
     sections: [
       {
         heading: "Overview",
         body: [
           "The VTOL Drone is a custom-engineered, long-endurance unmanned aerial vehicle purpose-built for autonomous surveillance and agricultural survey missions across the Australian landscape. Combining the vertical take-off and landing flexibility of a multirotor with the aerodynamic efficiency of a fixed-wing aircraft, the platform delivers extended operational range without the need for runways or launch infrastructure.",
-          "Developed around the Flightory Stallion airframe and powered by the open-source ArduPilot flight stack, the aircraft is engineered for professional remote-sensing applications in environments where conventional aviation is impractical or uneconomical.",
+          "The airframe is a fully custom design, 3D printed from PA6-CF, and powered by the open-source ArduPilot flight stack — engineered for professional remote-sensing applications in environments where conventional aviation is impractical or uneconomical.",
         ],
+      },
+      {
+        heading: "First Flight",
+        body: [
+          "First successful flight of the prototype airframe — initial hover and stability test on 4S power, confirming the propulsion, flight controller, and tilt-servo configuration before progressing to forward-flight transition.",
+        ],
+        video: "/drone-first-flight.mp4",
+        videoCaption: "First flight — initial hover validation on 4S power.",
       },
       {
         heading: "Mission Capabilities",
         body: [
-          "Early-Stage Bushfire Detection — The platform is designed to support autonomous fire spotting across remote and high-risk terrain. A dual-sensor AI payload enables detection of thermal anomalies before visible ignition, providing actionable intelligence to land managers and emergency response agencies.",
-          "Agricultural Survey & Crop Intelligence — A secondary commercial application is pyrethrum crop maturity assessment. Using a Flower Maturity Index derived from high-resolution aerial imagery, the system provides growers with precise harvest-timing data — reducing waste, improving yield quality, and optimising agronomic decision-making.",
+          "Early-Stage Bushfire Detection — The platform is designed to support fire spotting across remote and high-risk terrain. A dual-sensor thermal and visible-spectrum payload captures imagery of thermal anomalies before visible ignition, providing actionable intelligence to land managers and emergency response agencies.",
+          "Agricultural Survey & Crop Intelligence — A secondary commercial application is pyrethrum crop maturity assessment. High-resolution aerial imagery is captured for ground-based analysis, giving growers precise harvest-timing data — reducing waste, improving yield quality, and optimising agronomic decision-making.",
         ],
       },
       {
@@ -113,25 +123,24 @@ export const projects: Project[] = [
       {
         heading: "Airframe Construction",
         body: [
-          "The airframe is manufactured using a multi-material additive manufacturing strategy, selected specifically for durability under Australian environmental conditions. This hybrid approach balances structural integrity with the low mass required to achieve long-endurance performance targets.",
+          "The airframe is fully 3D printed from PA6-CF (carbon-fibre-reinforced nylon 6), selected for its superior strength-to-weight ratio and durability under Australian environmental conditions. Migrating from PETG-HF to PA6-CF reduced overall frame mass by approximately 1 kg — a significant gain on a sub-3 kg airframe.",
+          "PA6-CF's stiffness allows single-wall prints to retain enough structural strength for primary load paths, where PETG-HF previously required thicker multi-wall sections to achieve comparable rigidity. The result is a lighter, stiffer airframe with better cruise efficiency and endurance.",
         ],
         list: [
-          "Wing skins: ASA Aero foaming filament — lightweight, UV-stable, heat-resistant",
-          "Structural nodes: PAHT-CF (carbon-fibre-reinforced polyamide)",
+          "Primary airframe: PA6-CF (carbon-fibre-reinforced nylon 6) — single-wall structural prints",
+          "Weight saving: ~1 kg reduction vs. PETG-HF equivalent",
           "Vibration mounts and hinges: TPU 95A flexible elastomer",
           "Primary spars and tail booms: Pre-manufactured carbon fibre tubing",
         ],
       },
       {
-        heading: "Autonomous Payload Architecture",
+        heading: "Imaging Payload",
         body: [
-          "The payload bay is designed to accommodate a dual-camera artificial intelligence system for real-time onboard analysis, enabling detection, classification, and geotagging in flight — reducing post-mission processing time and enabling near-real-time situational awareness.",
+          "The payload bay carries a dual-sensor imaging system — thermal and visible-spectrum — for remote-sensing missions. Imagery is captured in flight and georeferenced post-mission to produce orthomosaic maps for agricultural survey, fire-risk assessment, and aerial documentation.",
         ],
         list: [
           "Thermal imaging: FLIR Boson 640 long-wave infrared sensor",
           "Visible-spectrum imaging: Arducam IMX477 HQ camera + 16 mm C-mount optics",
-          "Companion computer: NVIDIA Jetson Orin Nano Super",
-          "AI inference: YOLOv8n + MobileNetV3-Small, TensorRT on JetPack 6.2",
           "Post-flight: Georeferenced mapping via rasterio and QGIS pipelines",
         ],
       },
@@ -155,14 +164,8 @@ export const projects: Project[] = [
           "Bench configuration — parameter tuning and pre-flight validation via USB-tethered ground station",
           "Initial hover and transition testing — low-altitude flights on 4S power with default ArduPilot tuning",
           "Endurance testing — migration to 6S Li-Ion power system and aerodynamic optimisation",
-          "Mission payload integration — installation and calibration of dual-sensor AI system",
+          "Mission payload integration — installation and calibration of dual-sensor imaging system",
           "BVLOS certification pathway — long-range telemetry, LTE backup, satellite failsafe",
-        ],
-      },
-      {
-        heading: "Regulatory Compliance",
-        body: [
-          "All operations are designed to comply with Australian civil aviation and radio-frequency regulations, including CASA (Civil Aviation Safety Authority) for airspace and operational compliance, and ACMA (Australian Communications and Media Authority) for radio spectrum licensing.",
         ],
       },
       {
@@ -206,12 +209,12 @@ export const projects: Project[] = [
         ],
       },
       {
-        title: "AI Payload",
+        title: "Imaging Payload",
         rows: [
           { label: "Thermal", value: "FLIR Boson 640" },
           { label: "RGB", value: "Arducam IMX477" },
-          { label: "Compute", value: "Jetson Orin Nano" },
-          { label: "Inference", value: "YOLOv8n + TensorRT" },
+          { label: "Optics", value: "16 mm C-mount" },
+          { label: "Output", value: "Georef. mosaics" },
         ],
       },
       {
@@ -228,21 +231,19 @@ export const projects: Project[] = [
           "ArduPilot",
           "VTOL",
           "Tilt-Rotor",
-          "Jetson Orin",
-          "YOLOv8",
-          "TensorRT",
           "FLIR",
-          "LoRa",
+          "PA6-CF",
           "MAVLink",
           "3D Printing",
           "CAD",
+          "QGIS",
         ],
       },
     ],
-    tags: ["Aerospace", "Autonomy", "AI", "VTOL"],
+    tags: ["Aerospace", "Autonomy", "VTOL", "3D Printing"],
     accent: "from-amber-500/20 to-amber-500/0",
     cardBlurb:
-      "Custom long-endurance tilt-rotor VTOL UAV for bushfire detection and agricultural survey — ArduPilot, Jetson Orin, 4+ hour endurance.",
+      "Custom long-endurance tilt-rotor VTOL UAV for bushfire detection and agricultural survey — ArduPilot, PA6-CF airframe, 4+ hour endurance.",
   },
   {
     slug: "morphing-wing",
@@ -546,73 +547,6 @@ export const projects: Project[] = [
     accent: "from-sky-500/20 to-sky-500/0",
     cardBlurb:
       "LoRa-connected vineyard microclimate station — leaf-level T/RH, wind, and live downy mildew risk on a team dashboard.",
-  },
-  {
-    slug: "solenoid",
-    title: "Solenoid Actuator",
-    tagline:
-      "Design, construction, and testing of a solenoid actuator — exploring electromagnetic principles, coil winding techniques, and force-displacement characteristics.",
-    category: "Electromagnetics",
-    status: "In Progress",
-    hero: { type: "gradient" },
-    meta: [
-      { label: "Type", value: "Personal Project" },
-      { label: "Discipline", value: "Electromagnetics" },
-      { label: "Methods", value: "Build & Test" },
-    ],
-    sections: [
-      {
-        heading: "Overview",
-        body: [
-          "A solenoid is one of the most fundamental electromagnetic devices. This project focuses on designing, winding, and testing one from scratch to develop practical understanding of electromagnetic principles.",
-        ],
-      },
-      {
-        heading: "Design & Construction",
-        body: [
-          "Designed in CAD considering bobbin geometry, coil parameters (wire gauge, turns, layers), core material, and housing. Coil winding done by hand with careful layer management. Mild steel plunger machined for good magnetic permeability.",
-        ],
-      },
-      {
-        heading: "Electromagnetic Principles",
-        body: [
-          "Explores core electromagnetic concepts hands-on: Ampere's law relating current to magnetic field strength, how inductance varies with turns and core material, force-displacement curves at different voltages, and duty cycle thermal limits to prevent coil overheating.",
-        ],
-      },
-      {
-        heading: "Testing",
-        body: [
-          "Characterising force-displacement at various voltages, measuring transient response, and observing thermal behaviour. Measurements are compared against theoretical predictions to validate the design methodology.",
-        ],
-      },
-    ],
-    sidebar: [
-      {
-        title: "Design",
-        rows: [
-          { label: "Type", value: "Linear Pull" },
-          { label: "Core", value: "Mild Steel" },
-          { label: "Winding", value: "Hand Wound" },
-          { label: "Tool", value: "CAD" },
-        ],
-      },
-      {
-        title: "Concepts",
-        rows: [
-          { label: "Theory", value: "Ampere's Law" },
-          { label: "Analysis", value: "Force vs. Disp." },
-          { label: "Thermal", value: "Duty Cycle" },
-        ],
-      },
-      {
-        title: "Technologies",
-        tags: ["Electromagnetics", "CAD", "Coil Winding", "Machining", "Circuits", "Testing"],
-      },
-    ],
-    tags: ["Electromagnetics", "CAD", "Testing"],
-    accent: "from-rose-500/20 to-rose-500/0",
-    cardBlurb:
-      "Hand-wound linear-pull solenoid — CAD, machining, coil winding, and force-displacement characterisation.",
   },
 ];
 

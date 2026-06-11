@@ -15,30 +15,43 @@ type Role = {
 
 const roles: Role[] = [
   {
+    title: "Casual Academic — Engineering Design & Manufacturing Demonstrator",
+    company: "UNSW Sydney",
+    type: "Part-time",
+    dates: "Jan 2026 — Present",
+    duration: "5 mos",
+    location: "Sydney, NSW, Australia",
+    bullets: [
+      "Tutoring and demonstrating in a first-year engineering course introducing students to engineering design and manufacturing processes, supporting students through hands-on fabrication tasks.",
+      "Running workshop and lab sessions, including operation of laser cutters, vacuum formers, and a multi-printer 3D print farm — with ongoing machine maintenance.",
+    ],
+    skills: ["Teaching", "Workshop Operations", "3D Print Farm", "Laser Cutting", "Vacuum Forming"],
+  },
+  {
+    title: "Engineering Intern",
+    company: "AquaForce Australia",
+    type: "Internship",
+    dates: "Nov 2025 — Feb 2026",
+    duration: "4 mos",
+    location: "Hobart, Tasmania, Australia",
+    bullets: [
+      "Engineered motor-driven actuation systems for automated sail and flap positioning on an autonomous wind-powered vessel, integrating a clutch mechanism to manage dynamic loads and improve system resilience.",
+      "Developed embedded firmware to coordinate actuation across distributed microcontroller nodes, incorporating real-time feedback from inertial measurement units and wind sensing inputs.",
+      "Designed and deployed an onboard sensor array across the wing sail capturing aerodynamic and structural telemetry, transmitted via the vessel's long-range comms link for remote monitoring.",
+      "Telemetry pipeline fed directly into reinforcement learning exploration for autonomous wind-driven navigation strategies.",
+    ],
+    skills: ["SOLIDWORKS", "Rapid Prototyping", "Embedded Firmware", "Sensor Integration", "RL Data Pipelines"],
+  },
+  {
     title: "Chief Technical Officer",
     company: "Project Umbrella",
     dates: "Nov 2025 — Present",
-    duration: "6 mos",
+    duration: "7 mos",
     bullets: [
       "Co-founded and lead Project Umbrella, a UNSW engineering society enabling students to design and prototype real-world technical projects.",
       "Instrumental in development of the ADA²M project — an autonomous drone for agricultural and atmospheric monitoring — integrating mechanical, electrical, and software systems.",
       "Developing leadership, systems integration, and technical communication skills while fostering hands-on engineering across a multidisciplinary team.",
     ],
-  },
-  {
-    title: "Aerospace / Mechanical Intern",
-    company: "AquaForce Australia",
-    type: "Internship",
-    dates: "Nov 2025 — Present",
-    duration: "6 mos",
-    location: "Hobart, Tasmania, Australia",
-    bullets: [
-      "Engineered motor-driven actuation systems for automated sail and flap positioning, integrating a clutch mechanism to manage dynamic loads and improve system resilience.",
-      "Developed embedded firmware to coordinate actuation across distributed microcontroller nodes, incorporating real-time feedback from inertial measurement and wind sensing inputs.",
-      "Designed and deployed an onboard sensor array across the wing sail capturing aerodynamic and structural telemetry, streamed via the vessel's long-range comms link for remote monitoring.",
-      "Telemetry pipeline fed directly into reinforcement learning exploration for autonomous wind-driven navigation strategies.",
-    ],
-    skills: ["SOLIDWORKS", "Rapid Prototyping", "Embedded Firmware", "Sensor Integration", "RL Data Pipelines"],
   },
   {
     title: "Vineyard Hand",
@@ -77,7 +90,7 @@ const roles: Role[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-32 px-6 border-t border-white/5">
+    <section id="experience" className="py-20 px-6 border-t border-white/5">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

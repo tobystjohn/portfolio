@@ -2,19 +2,18 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Plane, Wind, Zap, ArrowUpRight } from "lucide-react";
+import { Plane, Wind, ArrowUpRight } from "lucide-react";
 import { projects } from "@/app/lib/projects";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   "fixed-wing-drone": Plane,
   "morphing-wing": Plane,
   "weather-station": Wind,
-  solenoid: Zap,
 };
 
 export default function Projects() {
   return (
-    <section id="work" className="py-32 px-6">
+    <section id="work" className="py-20 px-6 border-t border-white/5">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
